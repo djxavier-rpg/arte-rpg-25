@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Labirinto das Cores – Imagem Secreta</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    #imagem-grafite { margin-top: 30px; max-width: 100%; height: auto; }
+    .msg { font-weight: bold; margin-top: 25px; }
+    input[type=number] { width: 60px; font-size: 1.2em; }
+    button { font-size: 1.1em; padding: 4px 16px; }
+  </style>
+</head>
+<body>
+  <h1>🎨🔒 Revelação do Grafite Secreto</h1>
+  <p>Digite o número do dado (1 a 20) para ver a imagem correspondente ao seu grupo:</p>
+  <input type="number" id="dado" min="1" max="20" value="1">
+  <button onclick="mostrarImagem()">Ver Imagem</button>
+
+  <div id="imagem-area">
+    <img id="imagem-grafite" src="" alt="Imagem do Grafite" style="display:none;">
+    <div class="msg" id="mensagem"></div>
+  </div>
+
+  <script>
+    // Links das imagens (use os nomes exatos dos arquivos que você subiu)
+    const imagens = {
+      completa: "banksy-completa.jpg",
+      parcial: "banksy-parcial.jpg",
+      fragmentada: "banksy-fragmentada.jpg",
+      invisivel: "banksy-invisivel.jpg"
+    };
+
+    function mostrarImagem() {
+      const dado = parseInt(document.getElementById('dado').value, 10);
+      const img = document.getElementById('imagem-grafite');
+      const msg = document.getElementById('mensagem');
+      img.style.display = 'block';
+      msg.textContent = "";
+
+      if (dado >= 16 && dado <= 20) {
+        img.src = imagens.completa;
+        msg.textContent = "Parabéns! Você pode ver a obra completa.";
+      } else if (dado >= 11 && dado <= 15) {
+        img.src = imagens.parcial;
+        msg.textContent = "Você vê a obra parcialmente. Preencha as lacunas com criatividade!";
+      } else if (dado >= 6 && dado <= 10) {
+        img.src = imagens.fragmentada;
+        msg.textContent = "A imagem está desgastada e fragmentada. Use sua imaginação!";
+      } else if (dado >= 2 && dado <= 5) {
+        img.src = imagens.invisivel;
+        msg.textContent = "O grafite está quase invisível. Desafio máximo!";
+      } else if (dado === 1) {
+        img.src = imagens.invisivel;
+        msg.textContent = "Erro crítico! Não vê nada e ainda tem restrição de materiais!";
+      } else {
+        img.style.display = 'none';
+        msg.textContent = "Digite um valor entre 1 e 20.";
+      }
+    }
+  </script>
+</body>
+</html>
